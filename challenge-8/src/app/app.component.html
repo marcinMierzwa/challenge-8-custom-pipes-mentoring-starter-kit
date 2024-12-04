@@ -1,4 +1,5 @@
 <div class="container-fluid vw-100 vh-100 bg-body-tertiary p-0">
+
   <header>
     <nav class="navbar bg-body-secondary mb-4">
       <div class="container-fluid">
@@ -9,13 +10,19 @@
       </div>
     </nav>
     </header>
-  <main class="w-75 mx-auto shadow">
+
+  <main class="w-75 mx-auto sh">
     <div class="card">
       <div class="card-body">
         This is some text within a card body.
       </div>
     </div>
   </main>
+
+  <button class="btn btn-outline-dark my-5" (click)="getProducts()">get</button>
+
+  <p>{{ products() | json }}</p>
+
 </div>
 
 
