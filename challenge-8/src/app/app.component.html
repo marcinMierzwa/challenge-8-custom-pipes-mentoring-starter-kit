@@ -12,16 +12,64 @@
     </header>
 
   <main class="w-75 mx-auto sh">
-    <div class="card">
-      <div class="card-body">
-        This is some text within a card body.
-      </div>
-    </div>
+
+
+
+
+        <table cdk-table [dataSource]="dataSource">
+
+          <!-- Name Column -->
+          <ng-container cdkColumnDef="name">
+            <th cdk-header-cell *cdkHeaderCellDef>Name</th>
+            <td cdk-cell *cdkCellDef="let element">{{ element.name }}</td>
+          </ng-container>
+
+          <!-- Image Column -->
+          <ng-container cdkColumnDef="imageUrl">
+            <th cdk-header-cell *cdkHeaderCellDef>Image</th>
+            <td cdk-cell *cdkCellDef="let element">
+              <img [src]="element.imageUrl" alt="">
+            </td>
+          </ng-container>
+          
+        
+          <!-- Price Column -->
+          <ng-container cdkColumnDef="price">
+            <th cdk-header-cell *cdkHeaderCellDef>Price</th>
+            <td cdk-cell *cdkCellDef="let element">{{ element.price }}</td>
+          </ng-container>
+
+          <!-- Published Since Column -->
+          <ng-container cdkColumnDef="publishedAt">
+            <th cdk-header-cell *cdkHeaderCellDef>Published Since</th>
+            <td cdk-cell *cdkCellDef="let element">{{ element.publishedAt }}</td>
+          </ng-container>
+
+          <!-- Product Code Column -->
+          <ng-container cdkColumnDef="id">
+            <th cdk-header-cell *cdkHeaderCellDef>Product Code</th>
+            <td cdk-cell *cdkCellDef="let element">{{ element.id }}</td>
+          </ng-container>
+          
+        
+          <!-- Header Row -->
+          <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+          <!-- Data Rows -->
+          <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+
+
+
+
+
+
+
   </main>
 
-  <button class="btn btn-outline-dark my-5" (click)="getProducts()">get</button>
+  <!-- <button class="btn btn-outline-dark my-5" (click)="getProducts()">get</button> -->
 
-  <p>{{ products() | json }}</p>
+  <p>{{ productsSignal() | json }}</p>
 
 </div>
 

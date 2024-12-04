@@ -1,23 +1,31 @@
-import { Component, inject, Signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, computed, effect, inject, Signal } from '@angular/core';
 import { ProductService } from './Services/product.service';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, NgFor } from '@angular/common';
 import { ProductInterface } from './Models/product-interface';
 import { toSignal } from '@angular/core/rxjs-interop'
+import {CdkTableModule} from '@angular/cdk/table';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, JsonPipe],
+  imports: [JsonPipe, CdkTableModule, NgFor],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'mentoring-program-starter-kit';
-  private productService: ProductService = inject(ProductService);
-  readonly products: Signal <ProductInterface[]> = toSignal(this.productService.getProducts(), {initialValue: []})   
+  productService: ProductService = inject(ProductService);
 
-  getProducts(): void {
-    // this.productService.getProducts()
-  }
+  readonly productsSignal: Signal <ProductInterface[]> = toSignal(this.productService.getProducts(), {initialValue: []}) 
+
+  displayedColumns: string[] = ['name', 'imageUrl', 'price', 'publishedAt', 'id' ]
+  dataSource: ProductInterface[] = this.productsSignal();
+
+  constructor() {
+    effect(() => this.dataSource = this.productsSignal());
+    // effect(() => {
+    //   const data = this.productsSignal();
+    //   this.displayedColumns = data.length ? Object.keys(data[0]) : [];
+    // });
+  }  
 }
