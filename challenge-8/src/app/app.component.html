@@ -28,7 +28,7 @@
           <ng-container cdkColumnDef="imageUrl">
             <th cdk-header-cell *cdkHeaderCellDef>Image</th>
             <td class="text-center" cdk-cell *cdkCellDef="let element">
-                <img [src]="element.imageUrl" alt="image" style="width: 100px;" class="rounded-1 shadow-sm">
+                <img [src]="element.imageUrl | fallbackImage:'assets/no_image.png'" alt="image" style="width: 100px;" class="rounded-1 shadow-sm">
             </td>
           </ng-container>
           

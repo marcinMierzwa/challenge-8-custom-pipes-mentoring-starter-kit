@@ -5,11 +5,12 @@ import { ProductInterface } from './Models/product-interface';
 import { toSignal } from '@angular/core/rxjs-interop'
 import {CdkTableModule} from '@angular/cdk/table';
 import { TruncatePipe } from './Pipes/truncate.pipe';
+import { FallbackImagePipe } from './Pipes/fallback-image.pipe';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [JsonPipe, CdkTableModule, TruncatePipe],
+  imports: [JsonPipe, CdkTableModule, TruncatePipe, FallbackImagePipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -24,9 +25,5 @@ export class AppComponent {
 
   constructor() {
     effect(() => this.dataSource = this.productsSignal());
-    // effect(() => {
-    //   const data = this.productsSignal();
-    //   this.displayedColumns = data.length ? Object.keys(data[0]) : [];
-    // });
   }  
 }
