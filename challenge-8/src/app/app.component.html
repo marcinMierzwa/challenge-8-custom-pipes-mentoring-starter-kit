@@ -36,13 +36,13 @@
           <!-- Price Column -->
           <ng-container cdkColumnDef="price">
             <th cdk-header-cell *cdkHeaderCellDef>Price</th>
-            <td cdk-cell *cdkCellDef="let element">{{ element.price }}</td>
+            <td cdk-cell *cdkCellDef="let element">{{ element.price | formatPrice }}</td>
           </ng-container>
 
           <!-- Published Since Column -->
           <ng-container cdkColumnDef="publishedAt">
             <th cdk-header-cell *cdkHeaderCellDef>Published Since</th>
-            <td cdk-cell *cdkCellDef="let element">{{ element.publishedAt }}</td>
+            <td cdk-cell *cdkCellDef="let element">{{ element.publishedAt | publishedSince: timePeriod }}</td>
           </ng-container>
 
           <!-- Product Code Column -->
