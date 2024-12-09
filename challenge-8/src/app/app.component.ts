@@ -9,17 +9,19 @@ import { FallbackImagePipe } from './Pipes/fallback-image.pipe';
 import { FormatPricePipe } from './Pipes/format-price.pipe';
 import { PublishedSincePipe } from './Pipes/published-since.pipe';
 import { TimePeriod } from './Models/time-period.enum';
+import { FormatProductCodePipe } from './Pipes/format-product-code.pipe';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [JsonPipe, CdkTableModule, TruncatePipe, FallbackImagePipe, FormatPricePipe, PublishedSincePipe],
+  imports: [JsonPipe, CdkTableModule, TruncatePipe, FallbackImagePipe, FormatPricePipe, PublishedSincePipe, FormatProductCodePipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'mentoring-program-starter-kit';
-  timePeriod: TimePeriod = TimePeriod.YEARS;
+  timePeriod: TimePeriod = TimePeriod.YEARS
+  ;
 
   productService: ProductService = inject(ProductService);
 

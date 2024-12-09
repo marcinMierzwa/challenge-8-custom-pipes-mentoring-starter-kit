@@ -1,12 +1,13 @@
-<div class="container-fluid vw-100 vh-100 bg-body-tertiary p-0">
+<div class="container-fluid vw-100 vh-100 bg-body-tertiary p-0 overflow-x-hidden">
 
   <header>
-    <nav class="navbar bg-body-secondary mb-4">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-          Bootstrap
-        </a>
+    <nav class="navbar bg-secondary-subtle mb-4 justify-content-start align-items-center px-4">
+      <i class="bi bi-kanban me-2 fs-4 text-primary-emphasis"></i>
+      <h1 class="m-0 fs-4 text-primary-emphasis fw-medium">Products</h1>
+      <div class="ms-auto">
+        <button class="border-0 p-0 me-3 bg-transparent"><span class="flag-icon flag-icon-gb rounded-1"></span></button>
+        <button class="border-0 p-0 bg-transparent"><span class="flag-icon flag-icon-pl rounded-1"></span></button>
+
       </div>
     </nav>
     </header>
@@ -48,7 +49,7 @@
           <!-- Product Code Column -->
           <ng-container cdkColumnDef="id">
             <th cdk-header-cell *cdkHeaderCellDef>Product Code</th>
-            <td cdk-cell *cdkCellDef="let element">{{ element.id }}</td>
+            <td cdk-cell *cdkCellDef="let element">{{ element.id | formatProductCode: element.name }}</td>
           </ng-container>
           
         
@@ -67,9 +68,6 @@
 
   </main>
 
-  <!-- <button class="btn btn-outline-dark my-5" (click)="getProducts()">get</button> -->
-
-  <p>{{ productsSignal() | json }}</p>
 
 </div>
 
