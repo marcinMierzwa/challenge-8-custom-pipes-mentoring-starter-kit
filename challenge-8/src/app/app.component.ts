@@ -1,6 +1,6 @@
 import { Component, computed, effect, inject, Signal } from '@angular/core';
 import { ProductService } from './Services/product.service';
-import { JsonPipe, NgFor } from '@angular/common';
+import { JsonPipe,} from '@angular/common';
 import { ProductInterface } from './Models/product-interface';
 import { toSignal } from '@angular/core/rxjs-interop'
 import {CdkTableModule} from '@angular/cdk/table';
@@ -8,7 +8,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [JsonPipe, CdkTableModule, NgFor],
+  imports: [JsonPipe, CdkTableModule,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

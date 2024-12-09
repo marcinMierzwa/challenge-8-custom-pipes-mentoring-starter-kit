@@ -27,8 +27,8 @@
           <!-- Image Column -->
           <ng-container cdkColumnDef="imageUrl">
             <th cdk-header-cell *cdkHeaderCellDef>Image</th>
-            <td cdk-cell *cdkCellDef="let element">
-              <img [src]="element.imageUrl" alt="">
+            <td class="text-center" cdk-cell *cdkCellDef="let element">
+                <img [src]="element.imageUrl" alt="image" style="width: 100px;" class="rounded-1 shadow-sm">
             </td>
           </ng-container>
           
