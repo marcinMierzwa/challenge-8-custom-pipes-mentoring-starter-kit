@@ -5,9 +5,8 @@
       <i class="bi bi-kanban me-2 fs-4 text-primary-emphasis"></i>
       <h1 class="m-0 fs-4 text-primary-emphasis fw-medium">Products</h1>
       <div class="ms-auto">
-        <button class="border-0 p-0 me-3 bg-transparent"><span class="flag-icon flag-icon-gb rounded-1"></span></button>
-        <button class="border-0 p-0 bg-transparent"><span class="flag-icon flag-icon-pl rounded-1"></span></button>
-
+        <button class="border-0 p-0 me-3 bg-transparent" (click)="onLanguageChange('EN')"><span class="flag-icon flag-icon-gb rounded-1"></span></button>
+        <button class="border-0 p-0 bg-transparent" (click)="onLanguageChange('PL')"><span class="flag-icon flag-icon-pl rounded-1"></span></button>
       </div>
     </nav>
     </header>
@@ -21,13 +20,13 @@
 
           <!-- Name Column -->
           <ng-container cdkColumnDef="name">
-            <th cdk-header-cell *cdkHeaderCellDef>Name</th>
-            <td cdk-cell *cdkCellDef="let element">{{ element.name | truncate: 10  }}</td>
+            <th cdk-header-cell *cdkHeaderCellDef>{{ 'NAME' | translate: language() }}</th>
+            <td cdk-cell *cdkCellDef="let element">{{ element.name | truncate: 10 }}</td>
           </ng-container>
 
           <!-- Image Column -->
           <ng-container cdkColumnDef="imageUrl">
-            <th cdk-header-cell *cdkHeaderCellDef>Image</th>
+            <th cdk-header-cell *cdkHeaderCellDef>{{ 'IMAGE' | translate: (language()) }}</th>
             <td class="text-center" cdk-cell *cdkCellDef="let element">
                 <img [src]="element.imageUrl | fallbackImage:'assets/no_image.png'" alt="image" style="width: 100px;" class="rounded-1 shadow-sm">
             </td>
@@ -36,19 +35,22 @@
         
           <!-- Price Column -->
           <ng-container cdkColumnDef="price">
-            <th cdk-header-cell *cdkHeaderCellDef>Price</th>
+            <th cdk-header-cell *cdkHeaderCellDef>{{ 'PRICE' | translate: (language()) }}</th>
             <td cdk-cell *cdkCellDef="let element">{{ element.price | formatPrice }}</td>
           </ng-container>
 
           <!-- Published Since Column -->
           <ng-container cdkColumnDef="publishedAt">
-            <th cdk-header-cell *cdkHeaderCellDef>Published Since</th>
-            <td cdk-cell *cdkCellDef="let element">{{ element.publishedAt | publishedSince: timePeriod }}</td>
-          </ng-container>
+            <th cdk-header-cell *cdkHeaderCellDef>{{ 'PUBLISHED_SINCE' | translate: (language()) }}</th>
+            <td cdk-cell *cdkCellDef="let element">
+              {{ (element.publishedAt | publishedSince: timePeriod)!.value }}
+              {{ (element.publishedAt | publishedSince: timePeriod)!.key | translate: (language()) }}
+            </td>
+              </ng-container>
 
           <!-- Product Code Column -->
           <ng-container cdkColumnDef="id">
-            <th cdk-header-cell *cdkHeaderCellDef>Product Code</th>
+            <th cdk-header-cell *cdkHeaderCellDef>{{ 'PRODUCT_CODE' | translate: (language()) }}</th>
             <td cdk-cell *cdkCellDef="let element">{{ element.id | formatProductCode: element.name }}</td>
           </ng-container>
           
