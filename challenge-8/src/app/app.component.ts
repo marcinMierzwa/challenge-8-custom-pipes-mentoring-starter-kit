@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, effect, inject, signal, Signal, WritableSignal } from '@angular/core';
 import { ProductService } from './Services/product.service';
 import { ProductInterface } from './Models/product-interface';
 import { toSignal } from '@angular/core/rxjs-interop'
@@ -11,41 +11,19 @@ import { TimePeriod } from './Models/time-period.enum';
 import { FormatProductCodePipe } from './Pipes/format-product-code.pipe';
 import { Language } from './Models/language.enum';
 import { TranslatePipe } from './Pipes/translate.pipe';
+import { SearchBarComponent } from './Components/search-bar/search-bar.component';
+import { TRANSLATIONS } from './translations';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CdkTableModule, TruncatePipe, FallbackImagePipe, FormatPricePipe, PublishedSincePipe, FormatProductCodePipe, TranslatePipe],
+  imports: [ SearchBarComponent ,CdkTableModule, TruncatePipe, FallbackImagePipe, FormatPricePipe, PublishedSincePipe, FormatProductCodePipe, TranslatePipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [
     {
       provide: 'TRANSLATION',
-      useValue: {
-        en: {
-          NAME: 'Name',
-          IMAGE: 'Image',
-          PRICE: 'Price',
-          PUBLISHED_SINCE: 'Published Since',
-          PRODUCT_CODE: 'Product Code',
-          PUBLISHED_AT: 'Published At',
-          YEAR_AGO: 'year ago',
-          YEARS_AGO: 'years ago',
-          MONTHS_AGO: 'months ago',
-          DAYS_AGO: 'days ago',
-        },
-        pl: {
-          NAME: 'Nazwa',
-          IMAGE: 'Zdjęcie',
-          PRICE: 'Cena',
-          PUBLISHED_SINCE: 'Opublikowano',
-          PRODUCT_CODE: 'Kod Produktu',
-          YEAR_AGO: 'rok temu',
-          YEARS_AGO: 'lata temu',
-          MONTHS_AGO: 'miesięcy temu',
-          DAYS_AGO: 'dni temu',
-        },
-      },
+      useValue: TRANSLATIONS
     },
   ]
 })
