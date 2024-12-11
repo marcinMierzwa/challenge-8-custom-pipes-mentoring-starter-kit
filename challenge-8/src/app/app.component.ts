@@ -13,6 +13,7 @@ import { Language } from './Models/language.enum';
 import { TranslatePipe } from './Pipes/translate.pipe';
 import { SearchBarComponent } from './Components/search-bar/search-bar.component';
 import { TRANSLATIONS } from './translations';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -42,8 +43,6 @@ export class AppComponent {
 
   constructor() {
     effect(() =>  this.dataSource = this.productsSignal());
-    effect(() =>  console.log(this.searchBarValueSignal())
-    );
   }  
 
   onLanguageChange(language: 'EN' | 'PL'): void {
@@ -51,6 +50,6 @@ export class AppComponent {
   }
 
   captureSearchBarValue(searchBarValue: string): void {
-    this.searchBarValueSignal.update(()=> searchBarValue);
+    this.searchBarValueSignal.set(searchBarValue);
   }
 }

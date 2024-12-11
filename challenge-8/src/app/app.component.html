@@ -16,7 +16,7 @@
 
         <app-search-bar 
         [language]="language()"
-        (sendSearchBarValue)="captureSearchBarValue($event)"
+        (SearchBarValueChange)="captureSearchBarValue($event)"
         />
 
         <table cdk-table [dataSource]="dataSource">
