@@ -5,7 +5,7 @@
       <i class="bi bi-kanban me-2 fs-4 text-primary-emphasis"></i>
       <h1 class="m-0 fs-4 text-primary-emphasis fw-medium">Products</h1>
       <div class="ms-auto">
-        <button class="border-0 p-0 me-3 bg-transparent" (click)="onLanguageChange('EN')"><span class="flag-icon flag-icon-gb rounded-1"></span></button>
+        <button class="border-0 p-0 me-2 bg-transparent" (click)="onLanguageChange('EN')"><span class="flag-icon flag-icon-gb rounded-1"></span></button>
         <button class="border-0 p-0 bg-transparent" (click)="onLanguageChange('PL')"><span class="flag-icon flag-icon-pl rounded-1"></span></button>
       </div>
     </nav>
@@ -14,7 +14,10 @@
   <main class="w-75 mx-auto sh">
 
 
-        <app-search-bar [language]="language()"/>
+        <app-search-bar 
+        [language]="language()"
+        (sendSearchBarValue)="captureSearchBarValue($event)"
+        />
 
         <table cdk-table [dataSource]="dataSource">
 

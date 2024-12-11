@@ -34,16 +34,23 @@ export class AppComponent {
 
   productService: ProductService = inject(ProductService);
 
-  readonly productsSignal: Signal <ProductInterface[]> = toSignal(this.productService.getProducts(), {initialValue: []}); 
+  readonly productsSignal: Signal <ProductInterface[]> = toSignal(this.productService.getProducts(), {initialValue: []});
+  searchBarValueSignal: WritableSignal<string> = signal<string>(''); 
 
   displayedColumns: string[] = ['name', 'imageUrl', 'price', 'publishedAt', 'id']
   dataSource: ProductInterface[] = this.productsSignal();
 
   constructor() {
     effect(() =>  this.dataSource = this.productsSignal());
+    effect(() =>  console.log(this.searchBarValueSignal())
+    );
   }  
 
   onLanguageChange(language: 'EN' | 'PL'): void {
     language === 'EN' ? this.language.set(Language.EN) : this.language.set(Language.PL);
+  }
+
+  captureSearchBarValue(searchBarValue: string): void {
+    this.searchBarValueSignal.update(()=> searchBarValue);
   }
 }

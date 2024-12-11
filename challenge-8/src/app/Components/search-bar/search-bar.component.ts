@@ -1,7 +1,8 @@
-import { Component, input, InputSignal } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, input, InputSignal, OnInit, output } from '@angular/core';
+import { FormControl, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TranslatePipe } from '../../Pipes/translate.pipe';
 import { Language } from '../../Models/language.enum';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-search-bar',
@@ -10,8 +11,23 @@ import { Language } from '../../Models/language.enum';
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss'
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements OnInit {
 
-  language: InputSignal<Language> = input<Language>(Language.EN)
+  formBuilder: NonNullableFormBuilder = inject(NonNullableFormBuilder);
+
+  searchBarControl: FormControl<string> = this.formBuilder.control('');
+
+  language: InputSignal<Language> = input.required<Language>();
+  sendSearchBarValue = output<string>();
+
+  ngOnInit() {
+    this.searchBarControl.valueChanges
+      .pipe(
+        debounceTime(100), 
+      )
+      .subscribe((value: string) => {
+        this.sendSearchBarValue.emit(value);
+      });
+  }
 
 }
