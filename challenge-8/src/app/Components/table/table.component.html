@@ -1,1 +1,72 @@
-<p>table works!</p>
+<table cdk-table [dataSource]="dataSource()">
+  <!-- Name Column -->
+  <ng-container cdkColumnDef="name">
+    <th cdk-header-cell *cdkHeaderCellDef class="col-3">
+      {{ "NAME" | translate : language() }}
+    </th>
+    <td cdk-cell *cdkCellDef="let element">
+      {{ element.name | truncate : 10 | search : searchBarSignal() }}
+    </td>
+  </ng-container>
+
+  <!-- Image Column -->
+  <ng-container cdkColumnDef="imageUrl">
+    <th cdk-header-cell *cdkHeaderCellDef class="col-3">
+      {{ "IMAGE" | translate : language() }}
+    </th>
+    <td class="text-center" cdk-cell *cdkCellDef="let element">
+      <img
+        [src]="
+          element.imageUrl
+            | fallbackImage
+              : 'https://via.placeholder.com/300x200?text=No+Image'
+        "
+        alt="image"
+        style="height: 40px; width: 120px; object-fit: cover; cursor: grab"
+        class="rounded-1 shadow-sm"
+      />
+    </td>
+  </ng-container>
+
+  <!-- Price Column -->
+  <ng-container cdkColumnDef="price">
+    <th cdk-header-cell *cdkHeaderCellDef class="col-2">
+      {{ "PRICE" | translate : language() }}
+    </th>
+    <td cdk-cell *cdkCellDef="let element">
+      {{ element.price | formatPrice | search : searchBarSignal() }}
+    </td>
+  </ng-container>
+
+  <!-- Published Since Column -->
+  <ng-container cdkColumnDef="publishedAt">
+    <th cdk-header-cell *cdkHeaderCellDef class="col-2">
+      {{ "PUBLISHED_SINCE" | translate : language() }}
+    </th>
+    <td cdk-cell *cdkCellDef="let element">
+      {{ (element.publishedAt | publishedSince : timePeriod)?.value }}
+      {{
+        (element.publishedAt | publishedSince : timePeriod)!.key
+          | translate : language()
+          | search : searchBarSignal()
+      }}
+    </td>
+  </ng-container>
+
+  <!-- Product Code Column -->
+  <ng-container cdkColumnDef="id">
+    <th cdk-header-cell *cdkHeaderCellDef class="col-2">
+      {{ "PRODUCT_CODE" | translate : language() }}
+    </th>
+    <td cdk-cell *cdkCellDef="let element">
+      {{
+        element.id
+          | formatProductCode : element.name
+          | search : searchBarSignal()
+      }}
+    </td>
+  </ng-container>
+
+  <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+  <tr cdk-row *cdkRowDef="let row; columns: displayedColumns"></tr>
+</table>

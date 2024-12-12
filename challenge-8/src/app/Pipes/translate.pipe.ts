@@ -3,7 +3,7 @@ import { Language } from '../Models/language.enum';
 
 @Pipe({
   name: 'translate',
-  standalone: true
+  standalone: true,
 })
 export class TranslatePipe implements PipeTransform {
   constructor(@Inject('TRANSLATION') private translation: any) {}
@@ -11,5 +11,4 @@ export class TranslatePipe implements PipeTransform {
   transform(text: string, language: Language): string {
     return this.translation[language]?.[text] || text;
   }
-
 }

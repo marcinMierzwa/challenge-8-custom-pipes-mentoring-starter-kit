@@ -5,9 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class FormatProductCodePipe implements PipeTransform {
-
   transform(productId: string, productName: string): string {
-
     if (!productId || !productName) return '';
 
     const paddedId = productId.padStart(3, '0');
