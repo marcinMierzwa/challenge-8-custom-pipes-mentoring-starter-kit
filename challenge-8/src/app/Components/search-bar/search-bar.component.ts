@@ -1,5 +1,9 @@
-import { Component,  inject,  input, InputSignal, output } from '@angular/core';
-import { FormControl, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, input, InputSignal, output } from '@angular/core';
+import {
+  FormControl,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { TranslatePipe } from '../../Pipes/translate.pipe';
 import { Language } from '../../Models/language.enum';
 
@@ -8,13 +12,11 @@ import { Language } from '../../Models/language.enum';
   standalone: true,
   imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.scss'
+  styleUrl: './search-bar.component.scss',
 })
-export class SearchBarComponent  {
-
+export class SearchBarComponent {
   formBuilder: NonNullableFormBuilder = inject(NonNullableFormBuilder);
-  searchBar: FormControl = this.formBuilder.control("");
-
+  searchBar: FormControl = this.formBuilder.control('');
 
   language: InputSignal<Language> = input.required<Language>();
   SearchBarValueChange = output<string>();
@@ -23,5 +25,4 @@ export class SearchBarComponent  {
     const inputValue = this.searchBar.getRawValue();
     this.SearchBarValueChange.emit(inputValue);
   }
-
 }

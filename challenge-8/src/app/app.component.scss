@@ -1,4 +1,8 @@
-@import '~flag-icon-css/css/flag-icons.min.css';
+@import "~flag-icon-css/css/flag-icons.min.css";
 
-
-
+.wrapper {
+  background: linear-gradient(135deg, #f3f4f7, #dce1e9);
+}
+.navbar {
+  background: linear-gradient(135deg, #104110, #227722);
+}

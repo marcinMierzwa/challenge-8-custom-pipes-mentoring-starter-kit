@@ -5,7 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class FormatPricePipe implements PipeTransform {
-  
   transform(price: string): string {
     const formatedPrice = Number(price);
     if (formatedPrice === null) return '';

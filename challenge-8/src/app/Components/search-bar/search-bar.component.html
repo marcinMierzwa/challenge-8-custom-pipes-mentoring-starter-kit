@@ -1,12 +1,14 @@
-    <div class="container-fluid p-0 my-4">
-      <form class="d-flex" role="search">
-        <input 
-        class="form-control"
-        type="search"
-        placeholder="{{ 'SEARCH' | translate: language() }}" aria-label="Search"
-        name="searchBar"
-        [formControl]="searchBar"
-        (input)="onInputChange()"
-        >
-      </form>
-    </div>
+<div class="container-fluid p-0 my-4">
+  <form class="d-flex" role="search">
+    <input
+      class="form-control rounded-1"
+      style="color: #212529"
+      type="search"
+      placeholder="{{ 'SEARCH' | translate : language() }}"
+      aria-label="Search"
+      name="searchBar"
+      [formControl]="searchBar"
+      (input)="onInputChange()"
+    />
+  </form>
+</div>
