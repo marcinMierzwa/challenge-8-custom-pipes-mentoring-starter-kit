@@ -1,4 +1,4 @@
-import { Component, effect, input, InputSignal } from '@angular/core';
+import { Component, input, InputSignal } from '@angular/core';
 import { CdkTableModule } from '@angular/cdk/table';
 import { ProductInterface } from '../../Models/product-interface';
 import { TruncatePipe } from '../../Pipes/truncate.pipe';
