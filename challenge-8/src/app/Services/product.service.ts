@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import {
-  effect,
   inject,
   Injectable,
   signal,
