@@ -13,12 +13,12 @@ import { Language } from './Models/language.enum';
 import { TranslatePipe } from './Pipes/translate.pipe';
 import { SearchBarComponent } from './Components/search-bar/search-bar.component';
 import { TRANSLATIONS } from './translations';
-import { Observable } from 'rxjs';
+import { SearchPipe } from './Pipes/search.pipe';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ SearchBarComponent ,CdkTableModule, TruncatePipe, FallbackImagePipe, FormatPricePipe, PublishedSincePipe, FormatProductCodePipe, TranslatePipe],
+  imports: [ SearchBarComponent ,CdkTableModule, TruncatePipe, FallbackImagePipe, FormatPricePipe, PublishedSincePipe, FormatProductCodePipe, TranslatePipe, SearchPipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [
@@ -36,7 +36,7 @@ export class AppComponent {
   productService: ProductService = inject(ProductService);
 
   readonly productsSignal: Signal <ProductInterface[]> = toSignal(this.productService.getProducts(), {initialValue: []});
-  searchBarValueSignal: WritableSignal<string> = signal<string>(''); 
+  searchBarSignal: WritableSignal<string> = signal<string>(''); 
 
   displayedColumns: string[] = ['name', 'imageUrl', 'price', 'publishedAt', 'id']
   dataSource: ProductInterface[] = this.productsSignal();
@@ -50,6 +50,6 @@ export class AppComponent {
   }
 
   captureSearchBarValue(searchBarValue: string): void {
-    this.searchBarValueSignal.set(searchBarValue);
+    this.searchBarSignal.set(searchBarValue);
   }
 }

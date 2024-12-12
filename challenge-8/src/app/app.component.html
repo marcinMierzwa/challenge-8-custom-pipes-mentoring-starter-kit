@@ -24,7 +24,7 @@
           <!-- Name Column -->
           <ng-container cdkColumnDef="name">
             <th cdk-header-cell *cdkHeaderCellDef>{{ 'NAME' | translate: language() }}</th>
-            <td cdk-cell *cdkCellDef="let element">{{ element.name | truncate: 10 }}</td>
+            <td cdk-cell *cdkCellDef="let element">{{ element.name | truncate: 10 | search: (searchBarSignal()) }}</td>
           </ng-container>
 
           <!-- Image Column -->
