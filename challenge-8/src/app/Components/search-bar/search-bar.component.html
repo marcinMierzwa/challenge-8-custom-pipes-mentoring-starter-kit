@@ -4,9 +4,9 @@
         class="form-control"
         type="search"
         placeholder="{{ 'SEARCH' | translate: language() }}" aria-label="Search"
-        name="searchBarControl"
-        [ngModel]="searchBarControl"
-        (ngModelChange)="onInputChange($event)"
+        name="searchBar"
+        [formControl]="searchBar"
+        (input)="onInputChange()"
         >
       </form>
     </div>

@@ -1,81 +1,41 @@
-<div class="container-fluid vw-100 vh-100 bg-body-tertiary p-0 overflow-x-hidden">
-
+<div
+  class="container-fluid vw-100 vh-100 bg-body-tertiary p-0 overflow-x-hidden"
+>
   <header>
-    <nav class="navbar bg-secondary-subtle justify-content-start align-items-center px-4">
+    <nav
+      class="navbar bg-secondary-subtle justify-content-start align-items-center px-4"
+    >
       <i class="bi bi-kanban me-2 fs-4 text-primary-emphasis"></i>
       <h1 class="m-0 fs-4 text-primary-emphasis fw-medium">Products</h1>
       <div class="ms-auto">
-        <button class="border-0 p-0 me-2 bg-transparent" (click)="onLanguageChange('EN')"><span class="flag-icon flag-icon-gb rounded-1"></span></button>
-        <button class="border-0 p-0 bg-transparent" (click)="onLanguageChange('PL')"><span class="flag-icon flag-icon-pl rounded-1"></span></button>
+        <button
+          class="border-0 p-0 me-2 bg-transparent"
+          (click)="onLanguageChange('EN')"
+        >
+          <span class="flag-icon flag-icon-gb rounded-1"></span>
+        </button>
+        <button
+          class="border-0 p-0 bg-transparent"
+          (click)="onLanguageChange('PL')"
+        >
+          <span class="flag-icon flag-icon-pl rounded-1"></span>
+        </button>
       </div>
     </nav>
-    </header>
+  </header>
 
   <main class="w-75 mx-auto sh">
+    <app-search-bar
+      [language]="language()"
+      (SearchBarValueChange)="captureSearchBarValue($event)"
+    />
 
-
-        <app-search-bar 
-        [language]="language()"
-        (SearchBarValueChange)="captureSearchBarValue($event)"
-        />
-
-        <table cdk-table [dataSource]="dataSource">
-
-          <!-- Name Column -->
-          <ng-container cdkColumnDef="name">
-            <th cdk-header-cell *cdkHeaderCellDef>{{ 'NAME' | translate: language() }}</th>
-            <td cdk-cell *cdkCellDef="let element">{{ element.name | truncate: 10 | search: searchBarSignal() }}</td>
-          </ng-container>
-
-          <!-- Image Column -->
-          <ng-container cdkColumnDef="imageUrl">
-            <th cdk-header-cell *cdkHeaderCellDef>{{ 'IMAGE' | translate: (language()) }}</th>
-            <td class="text-center" cdk-cell *cdkCellDef="let element">
-                <img [src]="element.imageUrl | fallbackImage:'assets/no_image.png'" alt="image" style="width: 100px;" class="rounded-1 shadow-sm">
-            </td>
-          </ng-container>
-          
-        
-          <!-- Price Column -->
-          <ng-container cdkColumnDef="price">
-            <th cdk-header-cell *cdkHeaderCellDef>{{ 'PRICE' | translate: (language()) }}</th>
-            <td cdk-cell *cdkCellDef="let element">{{ element.price | formatPrice }}</td>
-          </ng-container>
-
-          <!-- Published Since Column -->
-          <ng-container cdkColumnDef="publishedAt">
-            <th cdk-header-cell *cdkHeaderCellDef>{{ 'PUBLISHED_SINCE' | translate: (language()) }}</th>
-            <td cdk-cell *cdkCellDef="let element">
-              {{ (element.publishedAt | publishedSince: timePeriod)!.value }}
-              {{ (element.publishedAt | publishedSince: timePeriod)!.key | translate: (language()) | search: searchBarSignal() }}
-            </td>
-              </ng-container>
-
-          <!-- Product Code Column -->
-          <ng-container cdkColumnDef="id">
-            <th cdk-header-cell *cdkHeaderCellDef>{{ 'PRODUCT_CODE' | translate: (language()) }}</th>
-            <td cdk-cell *cdkCellDef="let element">{{ element.id | formatProductCode: element.name }}</td>
-          </ng-container>
-          
-        
-          <!-- Header Row -->
-          <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
-          <!-- Data Rows -->
-          <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-
-
-
-
-
-
-
-
+    <app-table 
+    [dataSource]="productsSignal()" 
+    [language]="language()"
+    [searchBarSignal]="searchBarSignal()" />
   </main>
-
-
 </div>
-
 
 <!-- spinner -->
 <!-- <div class="spinner-border" role="status">
